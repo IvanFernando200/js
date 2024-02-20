@@ -1,0 +1,16 @@
+:root {
+  --main-bg-color: blue;
+}
+h1 {
+  background-color: var(--main-bg-color);
+}
+h1 + button {
+  border-radius: 0.5rem;
+} 
+.btn-dark{
+  background-color: transparent;
+  border: none;
+}
+h3::before{
+  content: "⭕▶"
+}

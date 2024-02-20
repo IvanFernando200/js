@@ -1,0 +1,23 @@
+.btn {
+  /* position: absolute; */
+  display: block;
+  background-color: pink;
+  border-radius: 4px;
+  outline: 0;
+  border: 0;
+  width: 20%;
+  margin: 0 auto;
+  transition: font-size 1s ease-in-out;
+  animation: 10s rotation;
+}
+.btn:hover {
+  font-size: 2rem;
+}
+@keyframes rotation {
+  0% {
+    rotate: 0 0deg;
+  }
+  100% {
+    rotate: 0 100deg;
+  }
+}
