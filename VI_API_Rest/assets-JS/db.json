@@ -1,59 +1,54 @@
 {
   "santos": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "Seiya",
       "constelacion": "Pegaso"
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "Shiryu",
       "constelacion": "Dragon"
     },
     {
-      "id": 4,
+      "id": "4",
       "nombre": "Shun",
       "constelacion": "Andromeda"
     },
     {
-      "id": 5,
+      "id": "5",
       "nombre": "Ikki",
       "constelacion": "Fenix"
     },
     {
       "nombre": "Aldebaran",
       "constelacion": "Tauro",
-      "id": 6
-    },
-    {
-      "nombre": "Mü",
-      "constelacion": "Virgo",
-      "id": 7
+      "id": "6"
     }
   ],
   "dioses": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "Athena",
       "de": "Tierra"
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "Poseidon",
       "de": "Mar"
     },
     {
-      "id": 3,
+      "id": "3",
       "nombre": "Hades",
       "de": "inframundo"
     },
     {
-      "id": 4,
+      "id": "4",
       "nombre": "Zeus",
       "de": "Cielo"
     },
     {
-      "id": 5,
+      "id": "5",
       "nombre": "Ares",
       "de": "Gerra"
     }

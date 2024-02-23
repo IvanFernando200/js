@@ -32,7 +32,14 @@
     $fragment = document.createDocumentFragment();
 
   fetch("./users.json", {
-    methodd: "GET",
+    method: "GET",
+    // body: JSON.stringify({
+    //   nombre: "Ivan",
+    //   apellido: "Silva",
+    // }),
+    // headers: {
+    //   "Content-type": "application/json",
+    // },
   })
     // .then((res) => {
     //   // res.text() --- pasar a texto para html
@@ -118,11 +125,10 @@
   const $axiosAsync = document.getElementById("axios-async"),
     $fragment = document.createDocumentFragment();
 
-  async function axisoAsync() {
+  async function getData() {
     try {
       const res = await axios.get("https://jsonplaceholder.typicode.com/users"),
         json = res.data;
-      
       json.forEach((el) => {
         const $li = document.createElement("li");
         $li.textContent = `${el.name} -- ${el.email} -- ${el.id}`;
@@ -139,5 +145,5 @@
     }
   }
 
-  axisoAsync();
+  getData();
 })();

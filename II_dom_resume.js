@@ -39,7 +39,7 @@ $etiqueta.children; // HTMLCollection
     // type
     // accept-->(image/png)
     // form
-    // minLengh
+    // minLength
     // placeholder
     // required="true"
   }
@@ -196,9 +196,11 @@ $etiqueta.children; // HTMLCollection
 // RESUME:: la mejor forma de insertar elementos es con createElement, createDocumentFragemnt y etiqueta template de html(clonandolo).
 {
   // CLONACION:
-  // $cloneCards = $cards.cloneNode(true);
-  // document.body.appendChild($cloneCards);
-  // appendChild()---inserta al finalde de todos los elmentos hijos.
+  // $clone = $cards.cloneNode(true);
+  // document.body.appendChild($clone);
+
+  // let $clone = document.importNode($template, true);
+  // document.body.appendChild($clone);
 
   // RECORRER:
   const $contenedor = document.querySelector(".cards");
@@ -211,6 +213,16 @@ $etiqueta.children; // HTMLCollection
       $card.classList.add("rotate-45");
     });
   })();
+  // ACCEDER:
+  // 1) Podemos acceder a sus hijos por clases
+  const $template = d.getElementById("crud-template").content;
+  const $name = $template.querySelector(".name");
+  // 2) Podemos acceder a sus hijos por etiqueatas.
+  const $template2 = d.getElementById("crud-template");
+  const $edad = $template2.querySelector("input[type='number']");
+  // 3: PARA FORMULARIOS---- que tengas hijso con la etiquea name y name es importante, es para el nombre de la variable
+  const $form = d.getElementById("form");
+  const $email = $form.email;
 }
 
 {
