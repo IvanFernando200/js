@@ -1,0 +1,143 @@
+body {
+  display: grid;
+  /* grid-template-columns: ; */
+  /* grid-template-areas: ; */
+
+  /* grid-auto-rows: ; */
+  /* grid-auto-columns: ; */
+  /* grid-auto-flow: column; 😁 [row--->per default, column, dense--->when there's spaces, it fill all] */
+}
+/* .child { */
+/* grid-column-start: ; */
+/* grid-column: ; */
+/* grid-row: ; */
+/* grid-area: ; */
+/* } */
+
+/* Dynamic */
+/* min-max() */
+/* minContent */
+/* auto-fill */
+/* auto-fit */
+
+/* Alignment: */
+/* justify-content */
+/* align-content */
+/* place-content: justify-content align-content */
+
+/* justify-items */
+/* align-items */
+/* place-items: justify-items align-items */
+
+/* justify-self */
+/* align-self */
+/* place-self: justify-self align-self */
+
+/* responsive design */
+/* @media screen and (min-width: 400px) AND (max-width: 650px){} */
+
+/* TRANSITION && ANIMATION */
+.container {
+  filter: contrast(10); /*------*/
+  background-color: aqua;
+  height: 40vh;
+  width: 100%;
+}
+
+.child {
+  height: 100px;
+  width: 100px;
+  border-radius: 50% 0;
+  background-color: rgba(33, 62, 223, 0.694);
+  transition: background 2s ease, rotate 2s ease, left 3s ease;
+  /* transition */
+  /* 
+     transition-property: ;
+     transition-duration: ;
+     transition-delay: ;
+     transition-timing-function: linear|ease|....;
+  */
+  position: relative;
+  left: 0;
+  animation: translation 10s ease infinite alternate, rotating 3s ease infinite;
+  /* Animation */
+  /* 
+    animation-name: ;
+    animation-duration: ;
+    animation-direction: alternate;
+    animation-timing-function: ;
+    animation-iteration-count: ;
+    animation-fill-modo: none|forwards|backwards|both|initial|inherit ;
+   */
+  &:hover {
+    rotate: 10deg;
+    background: rgb(205, 69, 6);
+  }
+}
+@keyframes translation {
+  0% {
+    translate: 0;
+  }
+  100% {
+    translate: 100vw;
+  }
+}
+@keyframes rotating {
+  50% {
+    rotate: 360deg;
+  }
+}
+/* and another css properties */
+
+/* transform: skew(), translate(), rotate(), scale() */
+
+/* clip-path:  */
+
+/* background-image: */
+/* filter: blur(px)  brightness(0-10) contrast(0-10)drop-shadow(px px px #000)
+*/
+
+/*
+for background color-- and images
+grayscale(0-1) hue-rotate(#deg) invert(20%) opacity(0-1) saturate(0-1) sepia()  */
+
+/* box-shadow----> for the boxes */
+/* drop-shadow---> for the images that has some parts transparent */
+
+.child2 {
+  height: 50px;
+  width: 60px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 40px;
+  animation: transform 2s ease alternate infinite;
+  filter: blur(10px);
+  box-shadow: 0px 0px 50px 0 #fffb03, 0px 0px 50px 0 #e6ff06,
+    0px 0px 50px 0 #eaff05, 0px 0px 50px 0 #f6ff00, 0px 0px 50px 0 #ffea00;
+}
+.child3 {
+  height: 50px;
+  width: 60px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 40px;
+  animation: transform 2s ease alternate-reverse infinite;
+  filter: blur(10px);
+  border: 10px solid #ff0;
+}
+
+@keyframes transform {
+  100% {
+    translate: 125px;
+  }
+}
+
+/* direction: ltr|rtl| initial|inherit */
+/* 
+letter Spacing:
+scroll-behavior:
+use-selected: none; ---- no pueda seleccionar
+text-shadow:
+*/

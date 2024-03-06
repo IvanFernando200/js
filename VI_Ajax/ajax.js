@@ -1,149 +1,117 @@
 (() => {
+  // XMLHttpRequest--
+  // Inconveniente: No puedo usar funcines asincronas.
+
   const xhr = new XMLHttpRequest(),
     $xhr = document.getElementById("xhr"),
     $fragment = document.createDocumentFragment();
-
   xhr.addEventListener("readystatechange", (e) => {
     if (xhr.readyState !== 4) return;
     if (xhr.status >= 200 && xhr.status < 300) {
-      // console.log("Exit");
-      // console.log(xhr);
       const json = JSON.parse(xhr.responseText);
-      json.forEach((el) => {
+      // console.log(json);
+      json.forEach((obj) => {
         const $li = document.createElement("li");
-        $li.textContent = `${el.name} -- ${el.email} -- ${el.id}`;
+        $li.textContent = `${obj.name} - ${obj.username}`;
         $fragment.append($li);
       });
-      $xhr.appendChild($fragment);
+      $xhr.append($fragment);
     } else {
-      // console.log("Error");
-      let message = xhr.statusText || "Ocurrio un error";
-      $xhr.innerHTML = `Error ${xhr.status}: ${message}`;
+      const message = xhr.statusText || "!Opps ocurrio un error";
+      $xhr.textContent = `Error ${xhr.status}: ${message}`;
     }
-    //console.log("Este mensaje cargara de cualquier forma");
+    // console.log("se ejecut sin importar");
   });
   xhr.open("GET", "https://jsonplaceholder.typicode.com/users");
-
   xhr.send();
 })();
 
 (() => {
+  // fetch
   const $fetch = document.getElementById("fetch"),
     $fragment = document.createDocumentFragment();
-
-  fetch("./users.json", {
-    method: "GET",
-    // body: JSON.stringify({
-    //   nombre: "Ivan",
-    //   apellido: "Silva",
-    // }),
-    // headers: {
-    //   "Content-type": "application/json",
-    // },
-  })
-    // .then((res) => {
-    //   // res.text() --- pasar a texto para html
-    //   // res.blob() --- para imagenes
-    //   console.log(res);
-    //   return res.ok ? res.json() : Promise.reject(res);
-    // })
+  fetch("https://jsonplaceholder.typicode.com/users")
     .then((res) => (res.ok ? res.json() : Promise.reject(res)))
     .then((json) => {
-      // console.log(json);
-      json.forEach((el) => {
+      json.forEach((obj) => {
         const $li = document.createElement("li");
-        $li.textContent = `${el.name} -- ${el.email} -- ${el.id}`;
-        // $li.innerHTML = el.name + " <mark>fetch</mark>";
-        $fragment.appendChild($li);
+        $li.textContent = `${obj.name} - ${obj.username}`;
+        $fragment.append($li);
       });
       $fetch.append($fragment);
     })
     .catch((err) => {
-      let message = err.statusText || "Ocurrio un error";
-      $fetch.innerHTML = `Error ${err.status}: ${message}`;
-    })
-    .finally(() => {
-      // console.log('Esto se ejecuta sin importar si ocurrase error')
+      const message = err.statusText || "!Opps ocurrio un error";
+      $fetch.textContent = `Error ${err.status}: ${message}`;
     });
 })();
 
-(() => {
-  const $fetchAsync = document.getElementById("fetch-async"),
-    $fragment = document.createDocumentFragment();
-  async function asynFetch() {
+((d) => {
+  // fetch +async
+  // Inconveniente: Tengo problemas con el manejo de errores
+  const $fetchAsync = d.getElementById("fetch-async"),
+    $fragment = d.createDocumentFragment();
+  const render = async () => {
     try {
-      const res = await fetch("https://jsonplaceholder.typicode.com/users"),
-        json = await res.json();
-      // if (!res.ok) throw new Error("Ocurrio un errro al socitar los datos");
+      const res = await fetch("https://jsonplaceholder.typicode.com/users");
+      const json = await res.json();
+      // if(!res.ok)throw new Error('Ocurrio un Eroro al solicitar los Datos');
       if (!res.ok) throw { status: res.status, statusText: res.statusText };
-      // console.log(json);
-      json.forEach((el) => {
+
+      if (res.status >= 300)
+        Promise.reject(new Error("Whoops! Ocurro un maldito error"));
+      json.forEach((obj) => {
         const $li = document.createElement("li");
-        $li.textContent = `${el.name} -- ${el.email} -- ${el.id}`;
-        $fragment.appendChild($li);
+        $li.textContent = `${obj.name} - ${obj.username}`;
+        $fragment.append($li);
       });
       $fetchAsync.append($fragment);
     } catch (err) {
-      // console.log(err);
-      let message = err.statusText || "Ocurrio un error";
-      $fetchAsync.innerHTML = `Error ${err.status}: ${message}`;
-    } finally {
-      // console.log("Esto se ejecuta sin importar si ocurrase error");
+      const message = err.statusText || "!Opps ocurrio un error";
+      $fetchAsync.textContent = `Error ${err.status}: ${message}`;
     }
-  }
-  asynFetch();
-})();
+  };
+  render();
+})(document);
 
-(() => {
-  const $axios = document.getElementById("axios"),
-    $fragment = document.createDocumentFragment();
+((d) => {
+  // axios
+  const $axios = d.getElementById("axios"),
+    $fragment = d.createDocumentFragment();
   axios
-    .get("https://jsonplaceholder.typicode.com/users")
+    .get("https://jsonplaceholder.typicode.com/user")
     .then((res) => {
       const json = res.data;
-      json.forEach((el) => {
-        const $li = document.createElement("li");
-        $li.textContent = `${el.name} -- ${el.email} -- ${el.id}`;
-        $fragment.appendChild($li);
+      json.forEach((obj) => {
+        const $li = d.createElement("li");
+        $li.textContent = `${obj.name} - ${obj.username}`;
+        $fragment.append($li);
       });
       $axios.append($fragment);
     })
     .catch((err) => {
-      // en axios me devuelve en el objeto response del error
-      // err.response;
-      let message = err.response.statusText || "Ocurrio un error";
-      $axios.innerHTML = `Error ${err.response.status}: ${message}`;
-    })
-    .finally(() => {
-      // console.log(
-      //   "Esto se ejecutara independientemente del resultado de Axios"
-      // );
+      const message = err.response.statusText || "!Opps ocurrio un error";
+      $axios.textContent = `Error ${err.response.status}: ${message}`;
     });
-})();
+})(document);
 
-(() => {
-  const $axiosAsync = document.getElementById("axios-async"),
-    $fragment = document.createDocumentFragment();
-
-  async function getData() {
+((d) => {
+  const $axiosAsync = d.getElementById("axios-async"),
+    $fragment = d.createDocumentFragment();
+  const render = async () => {
     try {
-      const res = await axios.get("https://jsonplaceholder.typicode.com/users"),
-        json = res.data;
-      json.forEach((el) => {
-        const $li = document.createElement("li");
-        $li.textContent = `${el.name} -- ${el.email} -- ${el.id}`;
-        $fragment.appendChild($li);
+      const res = await axios.get("https://jsonplaceholder.typicode.com/users");
+      const json = await res.data;
+      json.forEach((obj) => {
+        const $li = d.createElement("li");
+        $li.textContent = `${obj.name} - ${obj.username}`;
+        $fragment.append($li);
       });
       $axiosAsync.append($fragment);
     } catch (err) {
-      let message = err.response.statusText || "Ocurrio un error";
-      $axiosAsync.innerHTML = `Error ${err.response.status}: ${message}`;
-    } finally {
-      // console.log(
-      //   "Se ejecuta sin importar la respuesta de la peticion axios-async"
-      // );
+      const message = err.response.statusText || "!Opps ocurrio un error";
+      $axiosAsync.textContent = `Error ${err.response.status}: ${message}`;
     }
-  }
-
-  getData();
-})();
+  };
+  render();
+})(document);
